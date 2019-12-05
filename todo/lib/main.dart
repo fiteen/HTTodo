@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:todo/redux/app_route.dart';
 import 'package:todo/route/scale_route.dart';
 import 'package:todo/model/task_list_model.dart';
 import 'package:todo/model/task_model.dart';
@@ -10,9 +11,9 @@ import 'package:todo/utils/color_utils.dart';
 import 'package:todo/component/todo_badge.dart';
 import 'package:todo/component/task_progress_indicator.dart';
 import 'package:todo/view/gradient_background.dart';
-import 'package:todo/page/privacy_policy.dart';
-import 'package:todo/page/add_card_screen.dart';
-import 'package:todo/page/detail_screen.dart';
+import 'package:todo/pages/add_card_screen.dart';
+import 'package:todo/pages/detail_screen.dart';
+import 'package:todo/pages/page_path.dart';
 
 void main() {
   runApp(new MyApp());
@@ -32,6 +33,11 @@ class MyApp extends StatelessWidget {
             body1: TextStyle(fontSize: 14.0, fontFamily: 'Hint'),
           )),
       home: MyHomePage(title: ''),
+      onGenerateRoute: (RouteSettings item) {
+        return MaterialPageRoute<Object>(builder: (BuildContext context) {
+          return AppRoute.global.buildPage(item.name, item.arguments);
+        });
+      },
     );
 
     return ScopedModel<TodoListModel>(
@@ -102,9 +108,7 @@ class _MyHomePageState extends State<MyHomePage>
             actions: <Widget>[
               PopupMenuButton<Choice>(
                 onSelected: (choice) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          PrivacyPolicyScreen()));
+                  Navigator.of(context).pushNamed(PagePath.privacyPolicyPage);
                 },
                 itemBuilder: (BuildContext context) {
                   return choices.map((Choice choice) {

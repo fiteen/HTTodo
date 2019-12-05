@@ -3,7 +3,7 @@ import 'package:todo/component/todo_badge.dart';
 import 'package:todo/component/task_progress_indicator.dart';
 import 'package:todo/model/task_list_model.dart';
 import 'package:todo/model/hero_id_model.dart';
-import 'package:todo/page/add_todo_screen.dart';
+import 'package:todo/pages/add_todo_screen.dart';
 import 'package:todo/utils/color_utils.dart';
 import 'package:scoped_model/scoped_model.dart';
 

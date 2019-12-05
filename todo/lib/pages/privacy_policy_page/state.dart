@@ -1,25 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:fish_redux/fish_redux.dart';
 
-class PrivacyPolicyScreen extends StatelessWidget {
+class PrivacyPolicyPageState implements Cloneable<PrivacyPolicyPageState> {
+  String privacyPolicy;
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          'Privacy Policy',
-          style: TextStyle(color: Colors.black)
-        ),
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black12),
-        brightness: Brightness.light,
-      ),
-      body: Markdown(data: _PRIVACY_POLICY),
-    );
+  PrivacyPolicyPageState clone() {
+    return PrivacyPolicyPageState()
+      ..privacyPolicy = privacyPolicy;
   }
-  static const _PRIVACY_POLICY = """
+}
+
+PrivacyPolicyPageState initState(Map<String, dynamic> args) {
+  return PrivacyPolicyPageState()
+    ..privacyPolicy = """
 
 Sabin Bajracharya built the Todo app as a Free app. This SERVICE is provided by Sabin Bajracharya at no cost and is intended for use as is.
 
