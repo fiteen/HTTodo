@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:todo/redux/app_route.dart';
-import 'package:todo/route/scale_route.dart';
 import 'package:todo/model/task_list_model.dart';
 import 'package:todo/model/task_model.dart';
 import 'package:todo/model/hero_id_model.dart';
 import 'package:todo/model/data/choice_card.dart';
 import 'package:todo/utils/datetime_utils.dart';
 import 'package:todo/utils/color_utils.dart';
-import 'package:todo/component/todo_badge.dart';
-import 'package:todo/component/task_progress_indicator.dart';
-import 'package:todo/view/gradient_background.dart';
-import 'package:todo/pages/add_card_screen.dart';
-import 'package:todo/pages/detail_screen.dart';
+import 'package:todo/widgets/add_page_card/widget.dart';
+import 'package:todo/widgets/gradient_background/widget.dart';
 import 'package:todo/pages/page_path.dart';
+import 'package:todo/widgets/task_card/widget.dart';
 
 void main() {
   runApp(new MyApp());
@@ -212,147 +209,5 @@ class _MyHomePageState extends State<MyHomePage>
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-}
-
-class AddPageCard extends StatelessWidget {
-  final Color color;
-
-  const AddPageCard({Key key, this.color = Colors.black}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-        elevation: 4.0,
-        margin: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-        child: Material(
-            borderRadius: BorderRadius.circular(16.0),
-            color: Colors.white,
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => AddCardScreen(),
-                ));
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.add,
-                      size: 52.0,
-                      color: color,
-                    ),
-                    Container(
-                      height: 8.0,
-                    ),
-                    Text(
-                      'Add Category',
-                      style: TextStyle(color: color),
-                    )
-                  ],
-                ),
-              ),
-            )));
-  }
-}
-
-class TaskCard extends StatelessWidget {
-  final Task task;
-  final Color color;
-  final HeroId heroId;
-  final int totalTodos;
-  final int taskProgress;
-  final GlobalKey backdropKey;
-
-  TaskCard({
-    @required this.task,
-    @required this.color,
-    @required this.heroId,
-    @required this.totalTodos,
-    @required this.taskProgress,
-    @required this.backdropKey,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        final RenderBox renderBox =
-            backdropKey.currentContext.findRenderObject();
-        var backDropHeight = renderBox.size.height;
-        var bottomOffset = 60.0;
-        var horizontalOffset = 52.0;
-
-        var rect = RelativeRect.fromLTRB(horizontalOffset,
-            MediaQuery.of(context).size.height - backDropHeight, horizontalOffset, bottomOffset);
-        Navigator.push(
-            context,
-            ScaleRoute(
-              rect: rect,
-              widget: DetailScreen(
-                taskId: task.id,
-                heroId: heroId,
-              ),
-            ));
-      },
-      child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-        color: Colors.white,
-        elevation: 4.0,
-        margin: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TodoBadge(
-                id: heroId.codePointId,
-                codePoint: task.codePoint,
-                color: ColorUtils.getColorFrom(task.color),
-              ),
-              Spacer(flex: 8),
-              Container(
-                margin: EdgeInsets.only(bottom: 4.0),
-                child: Hero(
-                  tag: heroId.remainingTaskId,
-                  child: Text(
-                    "$totalTodos Task",
-                    style: Theme.of(context)
-                        .textTheme
-                        .body1
-                        .copyWith(color: Colors.grey[500]),
-                  ),
-                ),
-              ),
-              Hero(
-                tag: heroId.nameId,
-                child: Text(
-                  task.name,
-                  style: Theme.of(context)
-                      .textTheme
-                      .title
-                      .copyWith(color: Colors.black54),
-                ),
-              ),
-              Spacer(),
-              Hero(
-                tag: heroId.progressId,
-                child: TaskProgressIndicator(
-                  color: color,
-                  progress: taskProgress,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

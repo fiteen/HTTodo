@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/block_picker.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:todo/component/icon_picker.dart';
-import 'package:todo/component/todo_badge.dart';
 import 'package:todo/utils/color_utils.dart';
 import 'package:todo/model/task_list_model.dart';
 import 'package:todo/model/task_model.dart';
+import 'package:todo/widgets/color_picker_builder/widget.dart';
+import 'package:todo/widgets/icon_picker_builder/widget.dart';
 
 class AddCardScreen extends StatefulWidget {
   AddCardScreen();
@@ -128,89 +127,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
           ),
         );
       },
-    );
-  }
-}
-
-class ColorPickerBuilder extends StatelessWidget {
-  final Color color;
-  final ValueChanged<Color> onColorChanged;
-
-  ColorPickerBuilder({@required this.color, @required this.onColorChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-        child: Container(
-            width: 32.0,
-            height: 32.0,
-            child: Material(
-              color: color,
-              child: InkWell(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Select a color'),
-                          content: SingleChildScrollView(
-                            child: BlockPicker(
-                              availableColors: ColorUtils.defaultColors,
-                              pickerColor: color,
-                              onColorChanged: onColorChanged,
-                            ),
-                          ),
-                        );
-                      });
-                },
-              ),
-            )));
-  }
-}
-
-class IconPickerBuilder extends StatelessWidget {
-  final IconData iconData;
-  final ValueChanged<IconData> onIconChanged;
-  final Color highlightColor;
-
-  IconPickerBuilder(
-      {@required this.iconData,
-      @required this.onIconChanged,
-      Color highlightColor})
-      : this.highlightColor = highlightColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child: Container(
-        height: 40.0,
-        width: 40.0,
-        child: Material(
-          child: InkWell(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Select an icon'),
-                      content: SingleChildScrollView(
-                        child: IconPicker(
-                            currentIconData: iconData,
-                            onIconChanged: onIconChanged,
-                            highlightColor: highlightColor),
-                      ),
-                    );
-                  });
-            },
-            child: TodoBadge(
-              id: 'id',
-              codePoint: iconData.codePoint,
-              color: highlightColor,
-              size: 24,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

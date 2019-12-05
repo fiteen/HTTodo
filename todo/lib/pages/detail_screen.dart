@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:todo/component/todo_badge.dart';
-import 'package:todo/component/task_progress_indicator.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:todo/widgets/todo_badge/widget.dart';
+import 'package:todo/widgets/task_progress_indicator/widget.dart';
+import 'package:todo/widgets/delete_alert_dialog/widget.dart';
 import 'package:todo/model/task_list_model.dart';
 import 'package:todo/model/hero_id_model.dart';
 import 'package:todo/pages/add_todo_screen.dart';
 import 'package:todo/utils/color_utils.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 class DetailScreen extends StatefulWidget {
   final String taskId;
@@ -185,51 +186,5 @@ class DetailScreenState extends State<DetailScreen>
   void dispose() {
     super.dispose();
     _controller.dispose();
-  }
-}
-
-typedef void Callback();
-
-class DeleteAlertDialog extends StatelessWidget {
-  final Color color;
-  final Callback onActionPressed;
-
-  DeleteAlertDialog({@required this.color, @required this.onActionPressed});
-
-  Widget build(BuildContext context) {
-    return FlatButton(
-      textColor: color,
-      child: Icon(Icons.delete),
-      onPressed: () {
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('Delete this card?'),
-                content: SingleChildScrollView(
-                  child: Text(
-                      'This is a one way street! Deleting this will remove all the task assigned in this card.'),
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Delete'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      onActionPressed();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text('Cacel'),
-                    textColor: Colors.grey,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              );
-            });
-      },
-    );
   }
 }

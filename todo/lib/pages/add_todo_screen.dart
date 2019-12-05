@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:todo/component/todo_badge.dart';
+import 'package:todo/widgets/todo_badge/widget.dart';
 import 'package:todo/utils/color_utils.dart';
 import 'package:todo/model/task_list_model.dart';
 import 'package:todo/model/todo_model.dart';
