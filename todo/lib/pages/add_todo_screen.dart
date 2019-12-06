@@ -10,7 +10,6 @@ class AddTodoScreen extends StatefulWidget {
 
   AddTodoScreen({@required this.taskId});
 
-
   @override
   State<StatefulWidget> createState() {
     return _AddTodoScreenState();

@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:todo/pages/privacy_policy_page/page.dart';
+import 'package:todo/pages/add_task_page/page.dart';
 import 'package:todo/pages/page_path.dart';
 
 class AppRoute {
@@ -8,11 +9,11 @@ class AppRoute {
     if (_global == null) {
       _global = PageRoutes(
         pages: <String, Page<Object, dynamic>> {
-          PagePath.privacyPolicyPage: PrivacyPolicyPage()
+          PagePath.privacyPolicyPage: PrivacyPolicyPage(),
+          PagePath.addTaskPage: AddTaskPage()
         },
       );
     }
     return _global;
   }
-
 }
