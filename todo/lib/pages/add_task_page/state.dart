@@ -14,6 +14,6 @@ class AddTaskState implements Cloneable<AddTaskState> {
 
 AddTaskState initState(Map<String, dynamic> args) {
   return AddTaskState()
-    ..newTask = ''
+    ..newTask = ""
     ..taskId = args["taskId"];
 }

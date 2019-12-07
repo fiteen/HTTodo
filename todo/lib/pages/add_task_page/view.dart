@@ -90,7 +90,16 @@ Widget buildView(AddTaskState state, Dispatch dispatch, ViewService viewService)
               label: Text('Create Task'),
               backgroundColor: _color,
               onPressed: () {
-                dispatch(AddTaskActionCreator.onAction(_color, model, state.newTask, state.taskId));
+                if (state.newTask.isEmpty) {
+                  final snackBar = SnackBar(
+                    backgroundColor: _color,
+                    content: Text(
+                        'Ummm...It seems that you are trying to add invisible task which is not allowed in this realm.'),
+                  );
+                  Scaffold.of(context).showSnackBar(snackBar);
+                } else {
+                  dispatch(AddTaskActionCreator.addTaskAction(_color, model, state.newTask, state.taskId));
+                }
               },
             );
           },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/pages/add_card_screen.dart';
+import 'package:todo/pages/page_path.dart';
 
 class AddPageCard extends StatelessWidget {
   final Color color;
@@ -19,9 +19,7 @@ class AddPageCard extends StatelessWidget {
             color: Colors.white,
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => AddCardScreen(),
-                ));
+                Navigator.of(context).pushNamed(PagePath.addCardPage);
               },
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),

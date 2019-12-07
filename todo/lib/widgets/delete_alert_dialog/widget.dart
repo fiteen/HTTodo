@@ -28,6 +28,7 @@ class DeleteAlertDialog extends StatelessWidget {
                   child: Text('Delete'),
                   onPressed: () {
                     Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                     onActionPressed();
                   },
                 ),

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:todo/model/task_list_model.dart';
 
-enum AddTaskAction { action }
+enum AddTaskAction { onAddTask }
 
 class AddTaskActionCreator {
-  static Action onAction(Color color, TodoListModel model, String newTask, String taskId) {
-    return Action(AddTaskAction.action, payload: {
+  static Action addTaskAction(Color color, TodoListModel model, String newTask, String taskId) {
+    return Action(AddTaskAction.onAddTask, payload: {
       "color": color,
       "model": model,
       "newTask": newTask,
