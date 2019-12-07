@@ -173,7 +173,7 @@ class DetailScreenState extends State<DetailScreen>
                   backgroundColor: _color,
                   foregroundColor: Colors.white,
                   onPressed: () {
-                    Map<String, dynamic> args = {"taskId": widget.taskId};
+                    Map<String, dynamic> args = {"taskId": widget.taskId, "heroIds": _hero};
                     Navigator.of(context).pushNamed(
                       PagePath.addTaskPage,
                       arguments: args);

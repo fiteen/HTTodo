@@ -65,7 +65,7 @@ Widget buildView(AddTaskState state, Dispatch dispatch, ViewService viewService)
               Row(
                 children: [
                   TodoBadge(
-                    id: 'id',
+                    id: state.heroIds.codePointId,
                     codePoint: _task.codePoint,
                     color: _color,
                     size: 24,
