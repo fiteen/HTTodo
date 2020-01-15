@@ -1,2 +1,3 @@
 # HTTodo
-A todo app made with Flutter
+
+![](https://img.shields.io/badge/language-Dart-green.svg)
